@@ -6,3 +6,5 @@
   tasks:
     - name: Install R
       apt: pkg=r-base state=latest
+    - name: Install Ruby
+      apt: pkg=ruby-full state=latest
