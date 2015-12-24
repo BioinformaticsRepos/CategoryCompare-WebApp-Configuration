@@ -1,0 +1,4 @@
+#!/bin/bash
+# Runs the Ansible playbook to install all
+# dependencies required by this project.
+ansible-playbook ./ansible/playbooks/install-dependencies.yml
