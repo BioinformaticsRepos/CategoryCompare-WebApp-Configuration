@@ -2,7 +2,7 @@
 - name: Install CategoryCompare Web Dependencies
   hosts: all
   remote_user: ubuntu
-  sudo: yes
+  become: yes
   tasks:
     - name: Install R
       apt: pkg=r-base state=latest
