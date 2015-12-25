@@ -8,3 +8,13 @@
       apt: pkg=r-base state=latest
     - name: Install Ruby
       apt: pkg=ruby-full state=latest
+    - name: Install Rserve
+      apt: pkg=r-cran-rserve state=latest
+
+    # === Fix Ubuntu's broken Rserve package ===
+    # Ubuntu's rserve package doesn't set symlinks properly.
+    # See here for more info: https://bugs.launchpad.net/ubuntu/+source/rserve/+bug/1325325
+    - file: src=/usr/lib/R/site-library/Rserve/libs/Rserve dest=/usr/lib/R/bin/Rserve owner=root state=link force=yes
+    - file: src=/usr/lib/R/site-library/Rserve/libs/Rserve.dbg dest=/usr/lib/R/bin/Rserve.dbg owner=root state=link force=yes
+
+#    - bundler: state=present gemfile=~/SourceCode/CategoryCompare-WebApp-Application/Gemfile
