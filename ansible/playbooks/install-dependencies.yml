@@ -4,6 +4,27 @@
   remote_user: ubuntu
   become: yes
   tasks:
+    # NOTE: Uncomment these lines in order to add swap space to the target machine. This can be needed
+    #       when installing packages on, IE: EC2 instances, due to their low memory specs. This step
+    #       is commented out because, after the swap space has been added once, it shouldn't be added
+    #       again in the future.
+    # - name: Add swap space (1/5) - create swap file
+    #   command: fallocate -l 512M /mnt/swapfile.swap creates=/mnt/swapfile.swap
+    # - name: Register whether or not the swap file actually exists in Ansible
+    #   stat: path=/mnt/swapfile.swap
+    #   register: swapfile
+    # - name: Add swap space (2/5) - format swap file
+    #   command: mkswap /mnt/swapfile.swap
+    #   when: swapfile.stat.exists
+    # - name: Add swap space (3/5) - set swap file permissions
+    #   file: path=/mnt/swapfile.swap owner=root group=root mode=0600
+    #   when: swapfile.stat.exists
+    # - name: Add swap space (4/5) - have the system consider the swap file to be swap
+    #   command: swapon /mnt/swapfile.swap
+    #   when: swapfile.stat.exists
+    # - name: Add swap space (5/5) - write swap entry in fstab
+    #   mount: name=noe src=/mnt/swapfile.swap fstype=swap opts=sw passno=0 dump=0 state=present
+    #   when: swapfile.stat.exists
     - name: Install R
       apt: pkg=r-base state=latest
     - name: Install Ruby
