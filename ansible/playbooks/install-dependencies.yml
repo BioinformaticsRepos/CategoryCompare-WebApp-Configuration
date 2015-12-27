@@ -10,6 +10,13 @@
       apt: pkg=ruby-full state=latest
     - name: Install Rserve
       apt: pkg=r-cran-rserve state=latest
+    - name: Install SQLite3 prerequisite packages
+      # The SQLite3 Ruby gem needs this package installed in order to
+      # work. See: https://stackoverflow.com/questions/3458602/sqlite3-ruby-install-error-on-ubuntu
+      apt: pkg=libsqlite3-dev state=latest
+    - name: Install Ruby gems from Bundler
+      become: no
+      bundler: state=present gemfile=~/SourceCode/CategoryCompare-WebApp-Application/Gemfile
 
     # === Fix Ubuntu's broken Rserve package ===
     # Ubuntu's rserve package doesn't set symlinks properly.
