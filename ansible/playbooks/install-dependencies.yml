@@ -14,6 +14,10 @@
       # The SQLite3 Ruby gem needs this package installed in order to
       # work. See: https://stackoverflow.com/questions/3458602/sqlite3-ruby-install-error-on-ubuntu
       apt: pkg=libsqlite3-dev state=latest
+    - name: Install Bioconductor prerequisite packages (1/2) - XML
+      apt: pkg=libxml2-dev state=latest
+    - name: Install Bioconductor prerequisite packages (2/2) - RCurl
+      apt: pkg=libcurl4-openssl-dev
     - name: Install Ruby gems from Bundler
       become: no
       bundler: state=present gemfile=~/SourceCode/CategoryCompare-WebApp-Application/Gemfile
